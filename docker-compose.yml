@@ -21,7 +21,7 @@ services:
 
 
   db:
-    image: postgres
+    image: postgres:15-bullseye
     volumes:
       - 'db-data:/var/lib/postgresql/data'  # ここで使う引用符をシングルクオートに変更
     environment:
