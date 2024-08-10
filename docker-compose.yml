@@ -1,0 +1,29 @@
+version: '3'
+
+volumes:
+  db-data:
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/product-register"
+    environment:
+      - 'DATABASE_PASSWORD=postgres'  # ここで使う引用符をシングルクオートに変更
+    tty: true 
+    stdin_open: true
+    depends_on:
+      - db 
+    links:
+      - db
+
+
+  db:
+    image: postgres
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'  # ここで使う引用符をシングルクオートに変更
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
